@@ -11,6 +11,11 @@ Color bottomContainerColor = Color(0xFFEB1555);
 Color inactiveCardColour = Color(0xFF111328);
 Color primaryColour = Color(0xFF0A0E21);
 
+enum Gender {
+  male,
+  female
+}
+
 void main() => runApp(BMICalculator());
 
 class BMICalculator extends StatelessWidget {
@@ -39,8 +44,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
   Color maleCardColor = inactiveCardColour;
   Color femaleCardColor = inactiveCardColour;
-  void updateColor(int gender) {
-    if (gender == 1) {
+  void updateColor(Gender selectedGender) {
+    if (selectedGender == Gender.male) {
       if (maleCardColor == inactiveCardColour) {
         maleCardColor = activeCardColour;
         femaleCardColor = inactiveCardColour;
@@ -48,7 +53,7 @@ class _InputPageState extends State<InputPage> {
         maleCardColor = inactiveCardColour;
       }
     }
-    if (gender == 2){
+    if (selectedGender == Gender.female){
       if (femaleCardColor == inactiveCardColour) {
         femaleCardColor = activeCardColour;
         maleCardColor = inactiveCardColour;
@@ -80,7 +85,7 @@ class _InputPageState extends State<InputPage> {
                       onTap: () {
                         setState(
                           () {
-                            updateColor(1);
+                            updateColor(Gender.male);
                           },
                         );
                       },
@@ -96,7 +101,7 @@ class _InputPageState extends State<InputPage> {
                       onTap: () {
                         setState(
                               () {
-                            updateColor(2);
+                            updateColor(Gender.female);
                           },
                         );
                       },
@@ -113,7 +118,7 @@ class _InputPageState extends State<InputPage> {
             Expanded(
               child: Reusable_card(
                 colour: activeCardColour,
-                cardChild: Column(
+                cardChild: Row(
                   children: [
                     Icon(
                       FontAwesomeIcons.mars,
@@ -171,3 +176,4 @@ class _InputPageState extends State<InputPage> {
 //immutable widgets can be destroyed and new one created
 
 //final
+
